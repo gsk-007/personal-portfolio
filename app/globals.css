@@ -17,6 +17,9 @@
 
   --hero-grid-line: color-mix(in srgb, var(--foreground) 11%, transparent);
   --hero-grid-size: 3rem;
+
+  --experience-grid-line: color-mix(in srgb, var(--foreground) 5%, transparent);
+  --experience-grid-size: 4rem;
 }
 
 @theme inline {
@@ -137,6 +140,35 @@
 
     to {
       transform: translate3d(3rem, 3rem, 0);
+    }
+  }
+
+  .experience-grid {
+    background-image:
+      linear-gradient(to right, var(--experience-grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--experience-grid-line) 1px, transparent 1px);
+    background-size: var(--experience-grid-size) var(--experience-grid-size);
+    mask-image: radial-gradient(
+      ellipse 75% 65% at 50% 45%,
+      #000 15%,
+      transparent 78%
+    );
+    animation: experience-grid-drift 120s linear infinite;
+  }
+
+  @keyframes experience-grid-drift {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(2rem, 2rem, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .experience-grid {
+      animation: none;
     }
   }
 }
