@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none">
+  <rect width="180" height="180" rx="40" fill="#09090b"/>
+  <rect x="1" y="1" width="178" height="178" rx="39" stroke="#27272a"/>
+  <text
+    x="90"
+    y="118"
+    text-anchor="middle"
+    fill="#fafafa"
+    font-family="system-ui, sans-serif"
+    font-size="72"
+    font-weight="600"
+  >
+    P
+  </text>
+</svg>
