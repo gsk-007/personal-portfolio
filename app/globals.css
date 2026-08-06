@@ -15,16 +15,6 @@
   --accent-foreground: #09090b;
   --ring: #52525b;
 
-  --content-max: 72rem;
-  --content-narrow: 48rem;
-  --content-wide: 80rem;
-
-  --section-spacing: clamp(4rem, 8vw, 7rem);
-  --section-spacing-sm: clamp(2.5rem, 5vw, 4rem);
-  --section-spacing-lg: clamp(5rem, 10vw, 9rem);
-
-  --header-height: 4rem;
-
   --hero-grid-line: color-mix(in srgb, var(--foreground) 11%, transparent);
   --hero-grid-size: 3rem;
 }

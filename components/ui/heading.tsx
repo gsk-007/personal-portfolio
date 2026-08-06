@@ -2,12 +2,12 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const levelStyles = {
-  1: "text-[length:var(--text-h1)] leading-[var(--leading-heading)] tracking-[var(--tracking-tight)] font-semibold",
-  2: "text-[length:var(--text-h2)] leading-[var(--leading-heading)] tracking-[var(--tracking-tight)] font-semibold",
-  3: "text-[length:var(--text-h3)] leading-[var(--leading-heading)] tracking-[var(--tracking-tight)] font-medium",
-  4: "text-[length:var(--text-h4)] leading-[var(--leading-heading)] tracking-[var(--tracking-normal)] font-medium",
-  5: "text-[length:var(--text-body-sm)] leading-[var(--leading-heading)] tracking-[var(--tracking-normal)] font-medium",
-  6: "text-[length:var(--text-caption)] leading-[var(--leading-heading)] tracking-[var(--tracking-normal)] font-medium uppercase",
+  1: "text-h1 leading-heading tracking-tight font-semibold",
+  2: "text-h2 leading-heading tracking-tight font-semibold",
+  3: "text-h3 leading-heading tracking-tight font-medium",
+  4: "text-h4 leading-heading tracking-normal font-medium",
+  5: "text-body-sm leading-heading tracking-normal font-medium",
+  6: "text-caption leading-heading tracking-normal font-medium uppercase",
 } as const;
 
 type HeadingLevel = keyof typeof levelStyles;
@@ -43,7 +43,7 @@ export function DisplayHeading({
   return (
     <h1
       className={cn(
-        "text-[length:var(--text-display)] leading-[var(--leading-display)] tracking-[var(--tracking-tight)] font-semibold",
+        "text-display leading-display tracking-tight font-semibold",
         className,
       )}
       {...props}

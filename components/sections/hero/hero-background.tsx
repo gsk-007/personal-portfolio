@@ -21,10 +21,7 @@ export function HeroBackground() {
   }, []);
 
   useEffect(() => {
-    if (!parallaxActive) {
-      setPointer({ x: 0, y: 0 });
-      return;
-    }
+    if (!parallaxActive) return;
 
     const handlePointerMove = (event: PointerEvent) => {
       const normalizedX = (event.clientX / window.innerWidth - 0.5) * 2;
@@ -52,7 +49,7 @@ export function HeroBackground() {
       >
         <div
           className={cn(
-            "hero-grid absolute inset-[-3rem]",
+            "hero-grid absolute -inset-12",
             reduceMotion && "hero-grid-static",
           )}
         />

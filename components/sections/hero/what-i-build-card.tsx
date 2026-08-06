@@ -38,7 +38,7 @@ export function WhatIBuildCard() {
   return (
     <motion.aside
       aria-labelledby="what-i-build-heading"
-      className="w-full lg:max-w-[34rem] lg:justify-self-end xl:max-w-[36rem]"
+      className="w-full lg:max-w-lg lg:justify-self-end xl:max-w-xl"
       initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
@@ -73,7 +73,7 @@ export function WhatIBuildCard() {
         <div className="relative z-10 p-7 sm:p-8">
           <h2
             id="what-i-build-heading"
-            className="text-sm font-medium uppercase tracking-[0.14em] text-muted-foreground"
+            className="text-sm font-medium uppercase tracking-widest text-muted-foreground"
           >
             {whatIBuild.title}
           </h2>
@@ -100,24 +100,24 @@ export function WhatIBuildCard() {
                   }
                   className={cn(
                     "group rounded-xl border border-transparent p-2.5 -m-2",
-                    "transition-[border-color,background-color] duration-200 ease-out",
+                    "transition-colors duration-200 ease-out",
                     "hover:border-border/55 hover:bg-surface/40",
                   )}
                 >
                   <div className="flex items-start gap-4">
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border/55 bg-surface-elevated/90 transition-[border-color,background-color] duration-200 group-hover:border-foreground/10 group-hover:bg-surface-elevated">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-border/55 bg-surface-elevated/90 transition-colors duration-200 group-hover:border-foreground/10 group-hover:bg-surface-elevated">
                       <Icon
-                        className="size-[1.125rem] text-foreground/75 transition-[color,transform] duration-200 group-hover:rotate-[2.5deg] group-hover:text-foreground motion-reduce:transform-none"
+                        className="size-4.5 text-foreground/75 transition duration-200 group-hover:rotate-3 group-hover:text-foreground motion-reduce:transform-none"
                         aria-hidden="true"
                         strokeWidth={1.85}
                       />
                     </div>
 
                     <div className="min-w-0 space-y-1 pt-0.5">
-                      <p className="text-[0.9375rem] font-semibold leading-snug text-foreground">
+                      <p className="text-sm font-semibold leading-snug text-foreground">
                         {item.title}
                       </p>
-                      <p className="text-[0.6875rem] leading-relaxed tracking-wide text-muted-foreground/70">
+                      <p className="text-xs leading-relaxed tracking-wide text-muted-foreground/70">
                         {item.subtitle}
                       </p>
                     </div>

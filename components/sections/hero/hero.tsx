@@ -39,8 +39,8 @@ export function Hero() {
       aria-labelledby="hero-heading"
       spacing="sm"
       className={cn(
-        "relative flex min-h-[calc((100dvh-var(--header-height))*0.82)] items-start overflow-hidden !py-0",
-        "pt-4 pb-10 sm:pt-6 sm:pb-12 lg:min-h-[calc((100dvh-var(--header-height))*0.85)] lg:pt-8 lg:pb-8",
+        "relative flex min-h-[calc(100dvh-var(--spacing-16))] flex-col items-start overflow-hidden !py-0",
+        "pt-4 pb-10 sm:pt-6 sm:pb-12 lg:pt-8 lg:pb-8",
       )}
     >
       <motion.div
@@ -52,14 +52,14 @@ export function Hero() {
 
       <motion.div
         ref={heroRef}
-        className="relative z-10 flex w-full flex-col"
+        className="relative z-10 flex w-full flex-1 flex-col"
         style={reduceMotion ? undefined : { opacity: contentOpacity, y: contentY }}
       >
         <Container>
-          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center lg:gap-12 xl:gap-16">
+          <div className="grid items-start gap-10 lg:grid-cols-2 lg:items-center lg:gap-12 xl:gap-16">
             <HeroStaggerContainer className="flex flex-col items-center text-center lg:items-start lg:text-left">
               <HeroStaggerItem>
-                <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface-elevated/80 px-3.5 py-1.5 text-xs font-medium tracking-wide text-foreground/70 shadow-[0_1px_2px_rgba(0,0,0,0.2)] backdrop-blur-sm">
+                <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface-elevated/80 px-3.5 py-1.5 text-xs font-medium tracking-wide text-foreground/70 shadow-sm backdrop-blur-sm">
                   {!reduceMotion ? (
                     <motion.span
                       className="relative flex size-2 shrink-0 items-center justify-center"
@@ -95,7 +95,7 @@ export function Hero() {
                     </motion.span>
                   ) : (
                     <span
-                      className="size-2 shrink-0 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.7)]"
+                      className="size-2 shrink-0 rounded-full bg-emerald-400 shadow-sm"
                       aria-hidden="true"
                     />
                   )}
@@ -108,16 +108,16 @@ export function Hero() {
               </HeroStaggerItem>
 
               <HeroStaggerItem className="mt-4 space-y-3">
-                <p className="text-[length:var(--text-h4)] font-medium tracking-[var(--tracking-tight)] text-foreground/90">
+                <p className="text-h4 font-medium tracking-tight text-foreground/90">
                   {heroContent.role}
                 </p>
-                <p className="max-w-[30rem] text-[length:var(--text-body)] leading-[var(--leading-body)] text-foreground/85">
+                <p className="max-w-lg text-body leading-body text-foreground/85">
                   {heroContent.headline}
                 </p>
               </HeroStaggerItem>
 
-              <HeroStaggerItem className="mt-3.5 max-w-[26rem]">
-                <p className="text-[length:var(--text-body-sm)] leading-[var(--leading-body)] text-muted">
+              <HeroStaggerItem className="mt-3.5 max-w-md">
+                <p className="text-body-sm leading-body text-muted">
                   {heroContent.supporting}
                 </p>
               </HeroStaggerItem>
@@ -159,28 +159,28 @@ export function Hero() {
             <WhatIBuildCard />
           </div>
         </Container>
-      </motion.div>
 
-      <motion.div
-        className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 sm:bottom-5"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: reduceMotion ? 0.2 : 0.95 }}
-      >
-        <a
-          href="#experience"
-          aria-label="Scroll to experience section"
-          className="flex flex-col items-center gap-1 text-muted transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        <motion.div
+          className="mt-10 flex justify-center sm:mt-12 lg:mt-auto lg:pt-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: reduceMotion ? 0.2 : 0.95 }}
         >
-          <span className="text-[0.6875rem] font-medium uppercase tracking-[0.14em]">Scroll</span>
-          <motion.span
-            animate={reduceMotion ? undefined : { y: [0, 4, 0] }}
-            transition={reduceMotion ? undefined : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-            className="flex size-8 items-center justify-center rounded-full border border-border/55 bg-surface/35"
+          <a
+            href="#experience"
+            aria-label="Scroll to experience section"
+            className="flex flex-col items-center gap-1 text-muted transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
-            <ChevronDown className="size-4" aria-hidden="true" />
-          </motion.span>
-        </a>
+            <span className="text-xs font-medium uppercase tracking-widest">Scroll</span>
+            <motion.span
+              animate={reduceMotion ? undefined : { y: [0, 4, 0] }}
+              transition={reduceMotion ? undefined : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+              className="flex size-8 items-center justify-center rounded-full border border-border/55 bg-surface/35"
+            >
+              <ChevronDown className="size-4" aria-hidden="true" />
+            </motion.span>
+          </a>
+        </motion.div>
       </motion.div>
     </Section>
   );

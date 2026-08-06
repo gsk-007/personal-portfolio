@@ -2,9 +2,9 @@ import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const sizeStyles = {
-  default: "max-w-[var(--content-max)]",
-  narrow: "max-w-[var(--content-narrow)]",
-  wide: "max-w-[var(--content-wide)]",
+  default: "max-w-6xl",
+  narrow: "max-w-3xl",
+  wide: "max-w-7xl",
 } as const;
 
 type ContainerProps<T extends ElementType = "div"> = {

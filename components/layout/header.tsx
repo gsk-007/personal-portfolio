@@ -25,7 +25,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 h-[var(--header-height)] border-b transition-colors duration-200",
+        "sticky top-0 z-50 h-16 border-b transition-colors duration-200",
         isScrolled
           ? "border-border bg-background/90 backdrop-blur-md"
           : "border-transparent bg-background",
@@ -34,7 +34,7 @@ export function Header() {
       <Container className="flex h-full items-center justify-between">
         <Link
           href="/"
-          className="rounded-lg text-sm font-semibold tracking-[var(--tracking-tight)] text-foreground transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="rounded-lg text-sm font-semibold tracking-tight text-foreground transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           {siteConfig.logo}
         </Link>

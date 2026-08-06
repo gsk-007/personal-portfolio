@@ -3,11 +3,11 @@ import { cn } from "@/lib/utils";
 
 const variantStyles = {
   primary:
-    "bg-foreground text-background shadow-[0_1px_2px_rgba(0,0,0,0.25)] hover:-translate-y-[2px] hover:bg-foreground/92 hover:shadow-[0_6px_20px_rgba(250,250,250,0.08)] active:translate-y-0 active:bg-foreground/88 active:shadow-[0_1px_2px_rgba(0,0,0,0.25)]",
+    "bg-foreground text-background shadow-sm hover:-translate-y-0.5 hover:bg-foreground/92 hover:shadow-md active:translate-y-0 active:bg-foreground/88 active:shadow-sm",
   secondary:
-    "border border-border/80 bg-surface-elevated/80 text-foreground hover:-translate-y-[2px] hover:border-foreground/20 hover:bg-surface hover:shadow-[0_4px_16px_rgba(0,0,0,0.14)] active:translate-y-0 active:bg-surface-elevated",
+    "border border-border/80 bg-surface-elevated/80 text-foreground hover:-translate-y-0.5 hover:border-foreground/20 hover:bg-surface hover:shadow-md active:translate-y-0 active:bg-surface-elevated",
   ghost:
-    "text-foreground hover:-translate-y-[2px] hover:bg-surface-elevated active:translate-y-0 active:bg-surface",
+    "text-foreground hover:-translate-y-0.5 hover:bg-surface-elevated active:translate-y-0 active:bg-surface",
 } as const;
 
 const sizeStyles = {
@@ -39,7 +39,7 @@ type ButtonAsLink = ButtonBaseProps &
 type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 const baseStyles =
-  "group inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 motion-reduce:transform-none motion-reduce:transition-none";
+  "group inline-flex items-center justify-center gap-2 rounded-xl font-medium transition duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 motion-reduce:transform-none motion-reduce:transition-none";
 
 export function Button({
   variant = "primary",
