@@ -35,13 +35,6 @@ export const contactContent = {
       external: true,
     },
     {
-      id: "email",
-      label: "Email",
-      href: `mailto:${siteConfig.author.email}`,
-      copyValue: siteConfig.author.email,
-      copyLabel: "Copy email",
-    },
-    {
       id: "linkedin",
       label: "LinkedIn",
       href: siteConfig.links.linkedin,

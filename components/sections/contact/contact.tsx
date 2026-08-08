@@ -1,8 +1,6 @@
-import { Mail } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { contactContent } from "@/lib/content/contact";
 import { sectionCardClass, sectionCardPaddingClass } from "@/lib/section-styles";
@@ -21,6 +19,7 @@ export function Contact() {
     copy,
     urls,
     channels,
+    email,
     personalSignoff,
   } = contactContent;
 
@@ -38,33 +37,32 @@ export function Contact() {
           {sectionHeading}
         </Heading>
 
-        <div className={cn(sectionCardClass, sectionCardPaddingClass, "mt-14 w-full")}>
+        <div className={cn(sectionCardClass, sectionCardPaddingClass, "mt-8 w-full sm:mt-10")}>
           <Badge showIndicator className="text-foreground/70">
             {status.label}
           </Badge>
 
           <h3
             id="contact-title"
-            className="mt-6 text-h2 font-semibold tracking-tight text-foreground"
+            className="mt-4 text-h2 font-semibold tracking-tight text-foreground sm:mt-5"
           >
             {title}
           </h3>
 
-          <p className="mt-4 max-w-xl text-body leading-body text-muted">
+          <p className="mt-4 max-w-xl text-body leading-body text-muted sm:mt-5">
             {message}
           </p>
-
-          <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
-            <Button href={urls.mailto} size="lg" className="w-full sm:w-auto">
-              <Mail className="size-4" aria-hidden="true" />
-              {ctas.email.label}
-            </Button>
-          </div>
 
           <ContactCopyLinks
             channels={channels}
             copiedLabel={copy.copied}
-            className="mt-8 border-t border-border/50 pt-8"
+            emailCta={{
+              href: urls.mailto,
+              label: ctas.email.label,
+              copyValue: email,
+              copyLabel: copy.email,
+            }}
+            className="mt-6 border-t border-border/50 pt-6"
           />
 
           <ContactPersonalSignoff
