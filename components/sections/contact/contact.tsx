@@ -9,6 +9,7 @@ import { sectionCardClass, sectionCardPaddingClass } from "@/lib/section-styles"
 import { cn } from "@/lib/utils";
 import { ContactBackground } from "./contact-background";
 import { ContactCopyLinks } from "./contact-copy-links";
+import { ContactPersonalSignoff } from "./contact-personal-signoff";
 
 export function Contact() {
   const {
@@ -20,6 +21,7 @@ export function Contact() {
     copy,
     urls,
     channels,
+    personalSignoff,
   } = contactContent;
 
   return (
@@ -63,6 +65,11 @@ export function Contact() {
             channels={channels}
             copiedLabel={copy.copied}
             className="mt-8 border-t border-border/50 pt-8"
+          />
+
+          <ContactPersonalSignoff
+            content={personalSignoff}
+            className="mt-8 sm:mt-10"
           />
         </div>
       </Container>
