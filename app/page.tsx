@@ -1,3 +1,4 @@
+import { GardenBreak } from "@/components/sections/garden-break";
 import { Contact } from "@/components/sections/contact";
 import { Experience } from "@/components/sections/experience";
 import { Hero } from "@/components/sections/hero";
@@ -9,6 +10,7 @@ export default function Home() {
       <Hero />
       <Experience />
       <Projects />
+      <GardenBreak />
       <Contact />
     </main>
   );

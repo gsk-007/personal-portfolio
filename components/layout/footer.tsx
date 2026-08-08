@@ -16,16 +16,39 @@ const footerLinks = [
   },
 ] as const;
 
+const builtWithLinkClass =
+  "text-muted underline-offset-4 transition-colors duration-200 hover:text-foreground/85 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm";
+
 export function Footer() {
   return (
     <footer className={cn(sectionDividerClass, "bg-surface")}>
-      <Container className="flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between">
-        <div className="space-y-1">
-          <p className="text-sm font-medium text-foreground">
-            {siteConfig.author.name}
+      <Container className="space-y-5 py-8 sm:py-10">
+        <div
+          className="flex flex-col gap-2 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+        >
+          <p>
+            &copy; {currentYear} {siteConfig.author.name}
           </p>
-          <p className="text-sm text-muted">
-            &copy; {currentYear} {siteConfig.name}. All rights reserved.
+
+          <p>
+            Built with{" "}
+            <a
+              href="https://nextjs.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={builtWithLinkClass}
+            >
+              Next.js
+            </a>
+            <span className="text-muted/45"> · </span>
+            <a
+              href="https://www.framer.com/motion/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={builtWithLinkClass}
+            >
+              Framer Motion
+            </a>
           </p>
         </div>
 
