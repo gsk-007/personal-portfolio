@@ -15,6 +15,7 @@ export function Projects() {
     <Section
       id="projects"
       aria-labelledby="projects-heading"
+      divider
       className="relative"
     >
       <ProjectsBackground />

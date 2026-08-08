@@ -23,6 +23,9 @@
 
   --projects-grid-line: color-mix(in srgb, var(--foreground) 4%, transparent);
   --projects-grid-size: 3.5rem;
+
+  --contact-grid-line: color-mix(in srgb, var(--foreground) 3.5%, transparent);
+  --contact-grid-size: 4rem;
 }
 
 @theme inline {
@@ -257,6 +260,32 @@
   @media (prefers-reduced-motion: reduce) {
     .panel-spotlight-glow {
       display: none;
+    }
+  }
+
+  .contact-grid {
+    background-image:
+      linear-gradient(to right, var(--contact-grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--contact-grid-line) 1px, transparent 1px);
+    background-size: var(--contact-grid-size) var(--contact-grid-size);
+    mask-image: radial-gradient(
+      ellipse 70% 55% at 50% 85%,
+      #000 12%,
+      transparent 78%
+    );
+  }
+
+  .contact-horizon {
+    background: radial-gradient(
+      ellipse 55% 40% at 50% 100%,
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      transparent 72%
+    );
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-horizon {
+      animation: none;
     }
   }
 }

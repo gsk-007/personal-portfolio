@@ -7,11 +7,11 @@ export const siteConfig = {
   url: "https://example.com",
   author: {
     name: "Gursimrat Kalra",
-    email: "hello@example.com",
+    email: "gsingh16472@gmail.com",
   },
   links: {
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
+    github: "https://github.com/gsk-007",
+    linkedin: "https://linkedin.com/in/gursimrat-kalra",
     resume: "/resume.pdf",
   },
 } as const;

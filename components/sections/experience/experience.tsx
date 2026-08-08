@@ -20,6 +20,7 @@ export function Experience() {
     <Section
       id="experience"
       aria-labelledby="experience-heading"
+      divider
       className="relative"
     >
       <ExperienceBackground activeIndex={activeIndex} itemCount={items.length} />

@@ -11,6 +11,7 @@ import { Section } from "@/components/layout/section";
 import { HeroStaggerContainer, HeroStaggerItem } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { DisplayHeading } from "@/components/ui/heading";
+import { SocialLink } from "@/components/ui/social-link";
 import { heroContent } from "@/lib/content/hero";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
@@ -40,7 +41,7 @@ export function Hero() {
       spacing="sm"
       className={cn(
         "relative flex min-h-[calc(100dvh-var(--spacing-16))] flex-col items-start overflow-hidden !py-0",
-        "pt-4 pb-10 sm:pt-6 sm:pb-12 lg:pt-8 lg:pb-8",
+        "pt-4 pb-8 sm:pt-6 sm:pb-10 lg:pt-8 lg:pb-6",
       )}
     >
       <motion.div
@@ -137,18 +138,12 @@ export function Hero() {
                   <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2.5 lg:justify-start">
                     {socialLinks.map(({ label, href, icon: Icon, external }) => (
                       <li key={label}>
-                        <a
+                        <SocialLink
                           href={href}
-                          target={external ? "_blank" : undefined}
-                          rel={external ? "noopener noreferrer" : undefined}
-                          className="group inline-flex items-center gap-1.5 rounded-md px-1 py-1 text-sm font-medium text-muted transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                        >
-                          <Icon className="size-4 transition-transform duration-200 group-hover:-translate-y-px" aria-hidden="true" />
-                          <span className="relative">
-                            {label}
-                            <span className="absolute -bottom-px left-0 h-px w-0 bg-foreground/50 transition-all duration-200 group-hover:w-full" aria-hidden="true" />
-                          </span>
-                        </a>
+                          label={label}
+                          icon={Icon}
+                          external={external}
+                        />
                       </li>
                     ))}
                   </ul>

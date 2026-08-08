@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import type { ProjectItem } from "@/lib/content/projects";
 import { projectArchitectures } from "@/lib/content/project-architecture";
+import { sectionCardClass } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 import { ArchitecturePreview } from "./architecture-preview";
 import { ProjectLinks } from "./project-links";
@@ -61,7 +62,8 @@ export function ProjectPanel({ project, className }: ProjectPanelProps) {
         ref={spotlightRef}
         className={cn(
           PANEL_HEIGHT,
-          "panel-spotlight relative overflow-hidden rounded-2xl border border-border/55 bg-surface",
+          sectionCardClass,
+          "panel-spotlight relative overflow-hidden",
           "transition-[border-color,box-shadow] duration-300",
           "hover:border-foreground/14 hover:shadow-[0_6px_32px_-10px_rgba(0,0,0,0.4)]",
         )}

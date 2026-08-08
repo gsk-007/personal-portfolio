@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import { projectArchitectures } from "@/lib/content/project-architecture";
+import { sectionCardClass } from "@/lib/section-styles";
 import { cn } from "@/lib/utils";
 import { ArchitecturePreview } from "./architecture-preview";
 import { ProjectLinks } from "./project-links";
@@ -55,7 +56,8 @@ export function FeaturedProject({
     >
       <div
         className={cn(
-          "relative overflow-hidden rounded-2xl border border-border/55 bg-surface",
+          sectionCardClass,
+          "relative overflow-hidden",
           "transition-[border-color,box-shadow] duration-300",
           "group-hover/featured:border-foreground/14 group-hover/featured:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.45)]",
         )}
