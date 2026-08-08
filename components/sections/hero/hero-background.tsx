@@ -1,41 +1,64 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from "framer-motion";
 import { cn } from "@/lib/utils";
+
+const DESKTOP_MEDIA_QUERY = "(min-width: 1024px)";
+const PARALLAX_SPRING = { stiffness: 120, damping: 28 } as const;
 
 export function HeroBackground() {
   const reduceMotion = useReducedMotion();
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [pointer, setPointer] = useState({ x: 0, y: 0 });
+  const isDesktopRef = useRef(false);
+  const reduceMotionRef = useRef(reduceMotion);
+  const parallaxX = useMotionValue(0);
+  const parallaxY = useMotionValue(0);
+  const springX = useSpring(parallaxX, PARALLAX_SPRING);
+  const springY = useSpring(parallaxY, PARALLAX_SPRING);
 
-  const parallaxActive = isDesktop && !reduceMotion;
+  reduceMotionRef.current = reduceMotion;
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 1024px)");
-    const updateDesktop = () => setIsDesktop(mediaQuery.matches);
+    const mediaQuery = window.matchMedia(DESKTOP_MEDIA_QUERY);
+
+    const updateDesktop = () => {
+      isDesktopRef.current = mediaQuery.matches;
+
+      if (!mediaQuery.matches) {
+        parallaxX.set(0);
+        parallaxY.set(0);
+      }
+    };
 
     updateDesktop();
     mediaQuery.addEventListener("change", updateDesktop);
-    return () => mediaQuery.removeEventListener("change", updateDesktop);
-  }, []);
-
-  useEffect(() => {
-    if (!parallaxActive) return;
 
     const handlePointerMove = (event: PointerEvent) => {
+      if (reduceMotionRef.current || !isDesktopRef.current) {
+        return;
+      }
+
       const normalizedX = (event.clientX / window.innerWidth - 0.5) * 2;
       const normalizedY = (event.clientY / window.innerHeight - 0.5) * 2;
 
-      setPointer({
-        x: normalizedX * 4,
-        y: normalizedY * 3,
-      });
+      parallaxX.set(normalizedX * 4);
+      parallaxY.set(normalizedY * 3);
     };
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    return () => window.removeEventListener("pointermove", handlePointerMove);
-  }, [parallaxActive]);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateDesktop);
+      window.removeEventListener("pointermove", handlePointerMove);
+    };
+  }, [parallaxX, parallaxY]);
+
+  const parallaxEnabled = !reduceMotion;
 
   return (
     <div
@@ -44,8 +67,11 @@ export function HeroBackground() {
     >
       <motion.div
         className="absolute inset-0 min-h-full will-change-transform"
-        style={parallaxActive ? { x: pointer.x, y: pointer.y } : undefined}
-        transition={{ type: "spring", stiffness: 120, damping: 28 }}
+        style={
+          parallaxEnabled
+            ? { x: springX, y: springY }
+            : undefined
+        }
       >
         <div
           className={cn(

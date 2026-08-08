@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   Cloud,
   Layers,
@@ -27,13 +26,6 @@ const icons: Record<(typeof whatIBuild.items)[number]["icon"], LucideIcon> = {
 
 export function WhatIBuildCard() {
   const reduceMotion = useReducedMotion();
-  const [sweepKey, setSweepKey] = useState(0);
-
-  const triggerSweep = () => {
-    if (!reduceMotion) {
-      setSweepKey((key) => key + 1);
-    }
-  };
 
   return (
     <motion.aside
@@ -49,15 +41,10 @@ export function WhatIBuildCard() {
     >
       <div
         className="group/card relative overflow-hidden rounded-2xl border border-border/55 bg-surface/55 backdrop-blur-sm"
-        onMouseEnter={triggerSweep}
       >
         {!reduceMotion ? (
-          <motion.div
-            key={sweepKey}
-            className="pointer-events-none absolute inset-0 z-20"
-            initial={{ opacity: 0, x: "-120%", y: "-120%" }}
-            animate={{ opacity: [0, 1, 0], x: "120%", y: "120%" }}
-            transition={{ duration: 1.05, ease: easeOut }}
+          <div
+            className="card-sweep pointer-events-none absolute inset-0 z-20"
             aria-hidden="true"
           >
             <div
@@ -67,7 +54,7 @@ export function WhatIBuildCard() {
                   "linear-gradient(125deg, transparent 42%, rgba(250,250,250,0.09) 50%, transparent 58%)",
               }}
             />
-          </motion.div>
+          </div>
         ) : null}
 
         <div className="relative z-10 p-7 sm:p-8">

@@ -20,6 +20,9 @@
 
   --experience-grid-line: color-mix(in srgb, var(--foreground) 5%, transparent);
   --experience-grid-size: 4rem;
+
+  --projects-grid-line: color-mix(in srgb, var(--foreground) 4%, transparent);
+  --projects-grid-size: 3.5rem;
 }
 
 @theme inline {
@@ -169,6 +172,91 @@
   @media (prefers-reduced-motion: reduce) {
     .experience-grid {
       animation: none;
+    }
+  }
+
+  .projects-grid {
+    background-image:
+      linear-gradient(to right, var(--projects-grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--projects-grid-line) 1px, transparent 1px);
+    background-size: var(--projects-grid-size) var(--projects-grid-size);
+    mask-image: radial-gradient(
+      ellipse 78% 68% at 50% 42%,
+      #000 18%,
+      transparent 80%
+    );
+    animation: projects-grid-drift 140s linear infinite;
+  }
+
+  @keyframes projects-grid-drift {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(1.75rem, 1.75rem, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .projects-grid {
+      animation: none;
+    }
+  }
+
+  .card-sweep {
+    opacity: 0;
+    transform: translate(-120%, -120%);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .group\/card:hover .card-sweep {
+      animation: card-sweep 1.05s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+    }
+  }
+
+  @keyframes card-sweep {
+    0% {
+      opacity: 0;
+      transform: translate(-120%, -120%);
+    }
+
+    15% {
+      opacity: 1;
+    }
+
+    85% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+      transform: translate(120%, 120%);
+    }
+  }
+
+  .panel-spotlight {
+    --spotlight-x: 50%;
+    --spotlight-y: 50%;
+  }
+
+  .panel-spotlight-glow {
+    background: radial-gradient(
+      ellipse 55% 45% at var(--spotlight-x) var(--spotlight-y),
+      color-mix(in srgb, var(--foreground) 5%, transparent),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 300ms ease-out;
+  }
+
+  .panel-spotlight:hover .panel-spotlight-glow {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .panel-spotlight-glow {
+      display: none;
     }
   }
 }

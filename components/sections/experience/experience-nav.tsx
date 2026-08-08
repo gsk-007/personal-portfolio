@@ -18,6 +18,14 @@ type PulseState = {
   key: number;
 };
 
+function offsetsEqual(a: number[], b: number[]) {
+  if (a.length !== b.length) {
+    return false;
+  }
+
+  return a.every((value, index) => value === b[index]);
+}
+
 export function ExperienceNav({
   items,
   activeIndex,
@@ -27,13 +35,13 @@ export function ExperienceNav({
   const navRef = useRef<HTMLElement>(null);
   const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
   const previousIndexRef = useRef(activeIndex);
+  const nodeOffsetsRef = useRef<number[]>([]);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [nodeOffsets, setNodeOffsets] = useState<number[]>([]);
   const [pulse, setPulse] = useState<PulseState | null>(null);
 
   const itemCount = items.length;
-  const progress =
-    itemCount > 1 ? activeIndex / (itemCount - 1) : 1;
+  const progress = itemCount > 1 ? activeIndex / (itemCount - 1) : 1;
 
   useEffect(() => {
     const measureNodes = () => {
@@ -43,21 +51,28 @@ export function ExperienceNav({
         return;
       }
 
-      setNodeOffsets(
-        items.map((_, index) => {
-          const node = itemRefs.current[index];
-          if (!node) {
-            return index / Math.max(itemCount - 1, 1);
-          }
+      const nextOffsets = items.map((_, index) => {
+        const node = itemRefs.current[index];
 
-          const { offsetTop, offsetHeight } = node;
-          return (offsetTop + offsetHeight / 2) / navHeight;
-        }),
-      );
+        if (!node) {
+          return index / Math.max(itemCount - 1, 1);
+        }
+
+        const { offsetTop, offsetHeight } = node;
+        return (offsetTop + offsetHeight / 2) / navHeight;
+      });
+
+      if (offsetsEqual(nextOffsets, nodeOffsetsRef.current)) {
+        return;
+      }
+
+      nodeOffsetsRef.current = nextOffsets;
+      setNodeOffsets(nextOffsets);
     };
 
     measureNodes();
     window.addEventListener("resize", measureNodes);
+
     return () => window.removeEventListener("resize", measureNodes);
   }, [itemCount, items]);
 
@@ -71,8 +86,7 @@ export function ExperienceNav({
     previousIndexRef.current = activeIndex;
   }, [activeIndex, reduceMotion]);
 
-  const activeNodeOffset =
-    nodeOffsets[activeIndex] ?? progress;
+  const activeNodeOffset = nodeOffsets[activeIndex] ?? progress;
   const pulseFromOffset =
     nodeOffsets[pulse?.from ?? 0] ??
     (itemCount > 1 ? (pulse?.from ?? 0) / (itemCount - 1) : 0);
@@ -97,9 +111,7 @@ export function ExperienceNav({
         initial={false}
         animate={{ scaleY: progress }}
         transition={
-          reduceMotion
-            ? { duration: 0 }
-            : { duration: 0.5, ease: easeOut }
+          reduceMotion ? { duration: 0 } : { duration: 0.5, ease: easeOut }
         }
         style={{ top: 0, height: "100%" }}
       />
@@ -110,8 +122,7 @@ export function ExperienceNav({
           aria-hidden="true"
           initial={false}
           animate={{
-            scaleY:
-              itemCount > 1 ? hoveredIndex / (itemCount - 1) : 1,
+            scaleY: itemCount > 1 ? hoveredIndex / (itemCount - 1) : 1,
           }}
           transition={{ duration: 0.3, ease: easeOut }}
           style={{ top: 0, height: "100%" }}

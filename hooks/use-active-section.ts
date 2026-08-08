@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type UseActiveSectionOptions = {
   rootMargin?: string;
@@ -8,11 +8,12 @@ type UseActiveSectionOptions = {
 };
 
 export function useActiveSection(
-  sectionIds: string[],
+  sectionIds: readonly string[],
   options: UseActiveSectionOptions = {},
 ) {
   const { rootMargin = "-20% 0px -55% 0px", threshold = 0 } = options;
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const activeSectionRef = useRef<string | null>(null);
 
   useEffect(() => {
     const elements = sectionIds
@@ -37,16 +38,21 @@ export function useActiveSection(
           }
         }
 
-        if (visibleSections.size === 0) {
-          setActiveSection(null);
+        let nextSection: string | null = null;
+
+        if (visibleSections.size > 0) {
+          const mostVisible = [...visibleSections.entries()].sort(
+            (a, b) => b[1] - a[1],
+          )[0];
+          nextSection = mostVisible?.[0] ?? null;
+        }
+
+        if (nextSection === activeSectionRef.current) {
           return;
         }
 
-        const mostVisible = [...visibleSections.entries()].sort(
-          (a, b) => b[1] - a[1],
-        )[0];
-
-        setActiveSection(mostVisible?.[0] ?? null);
+        activeSectionRef.current = nextSection;
+        setActiveSection(nextSection);
       },
       { rootMargin, threshold },
     );

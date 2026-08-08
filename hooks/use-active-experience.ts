@@ -15,6 +15,7 @@ export function useActiveExperience(
   const refCallbacks = useRef<((element: HTMLElement | null) => void)[]>([]);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const isObserverReady = useRef(false);
+  const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const setupObserver = useCallback(() => {
@@ -57,9 +58,15 @@ export function useActiveExperience(
           (a, b) => b[1] - a[1],
         )[0]?.[0];
 
-        if (nextActive !== undefined) {
-          setActiveIndex(nextActive);
+        if (
+          nextActive === undefined ||
+          nextActive === activeIndexRef.current
+        ) {
+          return;
         }
+
+        activeIndexRef.current = nextActive;
+        setActiveIndex(nextActive);
       },
       {
         rootMargin,

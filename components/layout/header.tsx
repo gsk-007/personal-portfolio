@@ -1,26 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { Container } from "@/components/layout/container";
 import { useActiveSection } from "@/hooks/use-active-section";
+import { useScrollThreshold } from "@/hooks/use-scroll-threshold";
 import { navItems, sectionIds, siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 
 export function Header() {
   const activeSection = useActiveSection(sectionIds);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 8);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const isScrolled = useScrollThreshold(8);
 
   return (
     <header
