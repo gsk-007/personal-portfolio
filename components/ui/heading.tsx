@@ -29,7 +29,10 @@ export function Heading({
   const Component = as ?? (`h${level}` as const);
 
   return (
-    <Component className={cn(levelStyles[level], className)} {...props}>
+    <Component
+      className={cn(levelStyles[level], "text-heading", className)}
+      {...props}
+    >
       {children}
     </Component>
   );
@@ -43,7 +46,7 @@ export function DisplayHeading({
   return (
     <h1
       className={cn(
-        "text-display leading-display tracking-tight font-semibold",
+        "text-display leading-display tracking-tight font-semibold text-heading",
         className,
       )}
       {...props}

@@ -1,12 +1,16 @@
 @import "tailwindcss";
 
-:root {
+@custom-variant light (&:where(.light, .light *));
+
+:root,
+.dark {
   color-scheme: dark;
 
   --background: #09090b;
   --foreground: #fafafa;
   --muted: #a1a1aa;
   --muted-foreground: #71717a;
+  --heading: #fafafa;
   --border: #27272a;
   --border-subtle: #18181b;
   --surface: #0f0f12;
@@ -28,6 +32,30 @@
   --contact-grid-size: 4rem;
 }
 
+.light {
+  color-scheme: light;
+
+  --background: #fafafa;
+  --foreground: #18181b;
+  --muted: #71717a;
+  --muted-foreground: #a1a1aa;
+  --heading: #3467eb;
+  --border: #e4e4e7;
+  --border-subtle: #f4f4f5;
+  --surface: #ffffff;
+  --surface-elevated: #f4f4f5;
+  --accent: #3467eb;
+  --accent-foreground: #f8fafc;
+  --ring: #3467eb;
+
+  --hero-grid-line: color-mix(in srgb, var(--heading) 16%, transparent);
+  --experience-grid-line: color-mix(in srgb, var(--heading) 13%, transparent);
+  --projects-grid-line: color-mix(in srgb, var(--heading) 12%, transparent);
+  --contact-grid-line: color-mix(in srgb, var(--heading) 11%, transparent);
+
+  --nav-accent: var(--heading);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -40,6 +68,7 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-ring: var(--ring);
+  --color-heading: var(--heading);
 
   --font-sans: var(--font-geist);
   --font-mono: var(--font-geist-mono);
@@ -112,41 +141,23 @@
     mix-blend-mode: overlay;
   }
 
+  .light .hero-grain::after {
+    opacity: 0.045;
+    mix-blend-mode: multiply;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .hero-grain::after {
       opacity: 0.02;
     }
-
-    .hero-grid {
-      animation: none;
-    }
   }
 
-  .hero-grid {
-    background-image:
-      linear-gradient(to right, var(--hero-grid-line) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--hero-grid-line) 1px, transparent 1px);
-    background-size: var(--hero-grid-size) var(--hero-grid-size);
+  .hero-grid-mask {
     mask-image: radial-gradient(
       ellipse 92% 78% at 50% 42%,
       #000 24%,
       transparent 84%
     );
-    animation: hero-grid-drift 75s linear infinite;
-  }
-
-  .hero-grid-static {
-    animation: none;
-  }
-
-  @keyframes hero-grid-drift {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-
-    to {
-      transform: translate3d(3rem, 3rem, 0);
-    }
   }
 
   .experience-grid {

@@ -106,7 +106,7 @@ export function ExperienceNav({
       />
 
       <motion.div
-        className="absolute left-0 w-px origin-top bg-foreground/25"
+        className="absolute left-0 w-px origin-top bg-foreground/25 light:bg-heading/35"
         aria-hidden="true"
         initial={false}
         animate={{ scaleY: progress }}
@@ -118,7 +118,7 @@ export function ExperienceNav({
 
       {hoveredIndex !== null && hoveredIndex !== activeIndex ? (
         <motion.div
-          className="absolute left-0 w-px origin-top bg-foreground/10"
+          className="absolute left-0 w-px origin-top bg-foreground/10 light:bg-heading/15"
           aria-hidden="true"
           initial={false}
           animate={{
@@ -133,7 +133,7 @@ export function ExperienceNav({
         <>
           <motion.div
             key={`pulse-line-${pulse.key}`}
-            className="absolute left-0 w-px origin-top bg-foreground"
+            className="absolute left-0 w-px origin-top bg-foreground light:bg-heading"
             aria-hidden="true"
             initial={{ scaleY: pulseFromOffset }}
             animate={{ scaleY: pulseToOffset }}
@@ -143,7 +143,7 @@ export function ExperienceNav({
           />
           <motion.div
             key={`pulse-signal-${pulse.key}`}
-            className="absolute left-0 size-2 -translate-x-1/2 rounded-full bg-foreground shadow-[0_0_12px_rgba(250,250,250,0.45)]"
+            className="absolute left-0 size-2 -translate-x-1/2 rounded-full bg-foreground shadow-[0_0_12px_rgba(250,250,250,0.45)] light:bg-emerald-500 light:shadow-[0_0_12px_rgba(16,185,129,0.4)]"
             aria-hidden="true"
             initial={{ top: `${pulseFromOffset * 100}%`, opacity: 1 }}
             animate={{ top: `${pulseToOffset * 100}%`, opacity: [1, 1, 0.2] }}
@@ -165,8 +165,9 @@ export function ExperienceNav({
           height: "3.5rem",
           marginTop: "-1.75rem",
           background:
-            "linear-gradient(to bottom, transparent, color-mix(in srgb, var(--foreground) 14%, transparent), transparent)",
-          boxShadow: "0 0 24px color-mix(in srgb, var(--foreground) 8%, transparent)",
+            "linear-gradient(to bottom, transparent, color-mix(in srgb, var(--nav-accent, var(--foreground)) 14%, transparent), transparent)",
+          boxShadow:
+            "0 0 24px color-mix(in srgb, var(--nav-accent, var(--foreground)) 8%, transparent)",
         }}
       />
 
@@ -192,7 +193,7 @@ export function ExperienceNav({
                 {isActive && !reduceMotion ? (
                   <motion.span
                     key={`ripple-${activeIndex}`}
-                    className="absolute inset-0 rounded-full border border-foreground/25"
+                    className="absolute inset-0 rounded-full border border-foreground/25 light:border-emerald-500/40"
                     initial={{ scale: 0.8, opacity: 0.5 }}
                     animate={{ scale: 2.8, opacity: 0 }}
                     transition={{ duration: 0.5, ease: easeOut }}
@@ -204,9 +205,10 @@ export function ExperienceNav({
                   className={cn(
                     "relative rounded-full transition-colors duration-200",
                     isFuture && !isPreview
-                      ? "size-2 border border-border bg-transparent"
-                      : "size-2 bg-foreground",
-                    isActive && "shadow-[0_0_10px_rgba(250,250,250,0.35)]",
+                      ? "size-2 border border-border bg-transparent light:border-emerald-500/40"
+                      : "size-2 bg-foreground light:bg-emerald-500",
+                    isActive &&
+                      "shadow-[0_0_10px_rgba(250,250,250,0.35)] light:shadow-[0_0_10px_rgba(16,185,129,0.35)]",
                   )}
                   aria-hidden="true"
                   initial={false}

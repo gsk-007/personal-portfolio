@@ -95,10 +95,10 @@ export function FeaturedProject({
           <div
             className={cn(
               "border-t border-border/45 lg:border-l lg:border-t-0",
-              "bg-surface-elevated/25 p-6 sm:p-8 lg:p-10",
+              "bg-surface-elevated/25 p-6 sm:p-8 lg:p-10 light:bg-[#fbfcfe]",
               "h-[280px] lg:min-h-[380px]",
               "transition-[border-color,background-color] duration-300",
-              "group-hover/featured:border-foreground/10 group-hover/featured:bg-surface-elevated/40",
+              "group-hover/featured:border-foreground/10 group-hover/featured:bg-surface-elevated/40 light:group-hover/featured:bg-[#f7f9fc]",
             )}
           >
             <div className="h-[280px]">

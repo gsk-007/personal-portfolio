@@ -65,7 +65,7 @@ function PanelContent({
     <header className="space-y-1.5">
       <h3
         id={`experience-role-${experience.id}`}
-        className="text-h3 font-semibold tracking-tight text-foreground"
+        className="text-h3 font-semibold tracking-tight text-foreground light:text-heading"
       >
         {experience.role}
       </h3>
@@ -154,7 +154,7 @@ function TechPills({ items }: { items: readonly string[] }) {
     <ul className="flex flex-wrap gap-2" role="list" aria-label="Technologies">
       {items.map((item) => (
         <li key={item}>
-          <span className="inline-flex rounded-full border border-border/60 bg-surface-elevated px-2.5 py-1 text-xs text-muted-foreground transition-[color,background-color,border-color] duration-200 hover:border-foreground/20 hover:bg-surface-elevated/90 hover:text-foreground/85">
+          <span className="inline-flex rounded-full border border-border/60 bg-surface-elevated px-2.5 py-1 text-xs text-muted-foreground transition-[color,background-color,border-color] duration-200 hover:border-foreground/20 hover:bg-surface-elevated/90 hover:text-foreground/85 light:border-heading/20 light:bg-heading/8 light:text-heading/80 light:hover:border-heading/35 light:hover:bg-heading/12 light:hover:text-heading">
             {item}
           </span>
         </li>

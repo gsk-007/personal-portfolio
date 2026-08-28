@@ -115,7 +115,7 @@ export function ProjectPanel({ project, className }: ProjectPanelProps) {
           <div className="mt-5 shrink-0 h-[100px] overflow-hidden">
             {architecture ? (
               <motion.div
-                className="h-full rounded-lg border border-border/40 bg-surface-elevated/30 px-3 py-3"
+                className="h-full rounded-lg border border-border/40 bg-surface-elevated/30 px-3 py-3 light:bg-[#fbfcfe] light:border-border/70"
                 animate={
                   reduceMotion
                     ? undefined
