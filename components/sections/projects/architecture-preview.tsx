@@ -86,7 +86,6 @@ export function ArchitecturePreview({
   const reduceMotion = useReducedMotion();
   const [filledNodeIds, setFilledNodeIds] = useState<string[]>([]);
   const [activeNodeIds, setActiveNodeIds] = useState<string[]>([]);
-  const [cycleKey, setCycleKey] = useState(0);
   const timersRef = useRef<number[]>([]);
   const onHighlightRef = useRef(onHighlightedTechChange);
   const lastTechKeysRef = useRef<string[]>([]);
@@ -156,7 +155,6 @@ export function ArchitecturePreview({
       return clearTimers;
     }
 
-    setCycleKey((key) => key + 1);
     filledNodeIdsRef.current = [];
     activeNodeIdsRef.current = [];
     setFilledNodeIds([]);
@@ -249,7 +247,6 @@ export function ArchitecturePreview({
                   filled={filled}
                   active={active}
                   isFeatured={isFeatured}
-                  cycleKey={cycleKey}
                 />
 
                 {index < mainPathNodes.length - 1 ? (
@@ -272,7 +269,6 @@ export function ArchitecturePreview({
                 filled={isActive && filledNodeIds.includes(redisNode.id)}
                 active={isActive && activeNodeIds.includes(redisNode.id)}
                 isFeatured={isFeatured}
-                cycleKey={cycleKey}
                 className="w-full"
               />
             </div>
@@ -309,14 +305,6 @@ function FlowConnector({
             : { duration: 0.7, ease: FILL_EASE, delay: lit ? 0.12 : 0 }
         }
       />
-      {lit && !reduceMotion ? (
-        <motion.div
-          className="absolute inset-y-0 w-3 bg-linear-to-r from-transparent via-foreground/80 to-transparent light:via-heading"
-          initial={{ left: "-40%", opacity: 0 }}
-          animate={{ left: "120%", opacity: [0, 1, 0] }}
-          transition={{ duration: 0.72, ease: SNAP_EASE, delay: 0.14 }}
-        />
-      ) : null}
     </div>
   );
 }
@@ -326,14 +314,12 @@ function ArchNode({
   filled,
   active,
   isFeatured,
-  cycleKey,
   className,
 }: {
   node: ArchitectureNode;
   filled: boolean;
   active: boolean;
   isFeatured: boolean;
-  cycleKey: number;
   className?: string;
 }) {
   const reduceMotion = useReducedMotion();
@@ -354,9 +340,6 @@ function ArchNode({
           ? { scale: 1 }
           : {
               scale: active ? 1.045 : filled ? 1.015 : 1,
-              boxShadow: filled
-                ? "0 0 22px -6px color-mix(in srgb, var(--heading, var(--foreground)) 32%, transparent)"
-                : "0 0 0 0 transparent",
             }
       }
       transition={
@@ -366,7 +349,7 @@ function ArchNode({
       }
     >
       <motion.div
-        className="absolute inset-0 origin-left bg-foreground/8 light:bg-heading/7"
+        className="absolute inset-0 origin-left bg-foreground/8 light:bg-heading/8"
         initial={false}
         animate={{ scaleX: filled ? 1 : 0 }}
         transition={
@@ -378,30 +361,7 @@ function ArchNode({
       />
 
       <motion.div
-        className="absolute inset-0 origin-left bg-linear-to-r from-foreground/4 via-foreground/12 to-foreground/4 light:from-heading/3 light:via-heading/10 light:to-heading/3"
-        initial={false}
-        animate={{ scaleX: filled ? 1 : 0, opacity: filled ? 1 : 0 }}
-        transition={
-          reduceMotion
-            ? { duration: 0 }
-            : { duration: 0.85, ease: FILL_EASE }
-        }
-        aria-hidden="true"
-      />
-
-      {filled && !reduceMotion ? (
-        <motion.div
-          key={`sheen-${node.id}-${cycleKey}`}
-          className="pointer-events-none absolute inset-y-0 w-1/2 bg-linear-to-r from-transparent via-foreground/35 to-transparent light:via-white/55"
-          initial={{ left: "-55%", opacity: 0 }}
-          animate={{ left: "110%", opacity: [0, 1, 0] }}
-          transition={{ duration: 0.9, ease: SNAP_EASE }}
-          aria-hidden="true"
-        />
-      ) : null}
-
-      <motion.div
-        className="absolute inset-y-0 left-0 w-[2px] origin-center bg-foreground light:bg-heading"
+        className="absolute inset-y-0 left-0 w-[2px] origin-center bg-foreground/80 light:bg-heading"
         initial={false}
         animate={{
           scaleY: active ? 1 : filled ? 0.7 : 0,
