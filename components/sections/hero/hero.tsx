@@ -40,8 +40,8 @@ export function Hero() {
       aria-labelledby="hero-heading"
       spacing="sm"
       className={cn(
-        "relative flex min-h-[calc(100dvh-var(--spacing-16))] flex-col items-start overflow-hidden !py-0",
-        "pt-4 pb-8 sm:pt-6 sm:pb-10 lg:pt-8 lg:pb-6",
+        "relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden !py-0",
+        "pt-20 pb-8 sm:pt-24 sm:pb-10 lg:pt-32 lg:pb-6",
       )}
     >
       <motion.div
@@ -53,11 +53,11 @@ export function Hero() {
 
       <motion.div
         ref={heroRef}
-        className="relative z-10 flex w-full flex-1 flex-col"
+        className="relative z-10 flex w-full flex-1 flex-col justify-center"
         style={reduceMotion ? undefined : { opacity: contentOpacity, y: contentY }}
       >
-        <Container>
-          <div className="grid items-start gap-10 lg:grid-cols-2 lg:items-center lg:gap-12 xl:gap-16">
+        <Container size="wide" className="flex-1 flex flex-col justify-center">
+          <div className="grid items-start gap-10 lg:grid-cols-2 lg:items-center lg:gap-12 xl:gap-16 2xl:gap-24">
             <HeroStaggerContainer className="flex flex-col items-center text-center lg:items-start lg:text-left">
               <HeroStaggerItem>
                 <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface-elevated/80 px-3.5 py-1.5 text-xs font-medium tracking-wide text-foreground/70 shadow-sm backdrop-blur-sm">
@@ -108,16 +108,16 @@ export function Hero() {
                 <DisplayHeading id="hero-heading">{siteConfig.author.name}</DisplayHeading>
               </HeroStaggerItem>
 
-              <HeroStaggerItem className="mt-4 space-y-3">
+              <HeroStaggerItem className="mt-4 space-y-3 2xl:space-y-4">
                 <p className="text-h4 font-medium tracking-tight text-foreground/90">
                   {heroContent.role}
                 </p>
-                <p className="max-w-lg text-body leading-body text-foreground/85">
+                <p className="max-w-lg text-body leading-body text-foreground/85 2xl:max-w-2xl">
                   {heroContent.headline}
                 </p>
               </HeroStaggerItem>
 
-              <HeroStaggerItem className="mt-3.5 max-w-md">
+              <HeroStaggerItem className="mt-3.5 max-w-md 2xl:max-w-xl">
                 <p className="text-body-sm leading-body text-muted">
                   {heroContent.supporting}
                 </p>

@@ -32,7 +32,7 @@ export function Contact() {
     >
       <ContactBackground />
 
-      <Container className="relative z-10">
+      <Container size="wide" className="relative z-10">
         <Heading id="contact-heading" level={2}>
           {sectionHeading}
         </Heading>

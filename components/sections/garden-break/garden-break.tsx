@@ -10,7 +10,7 @@ export function GardenBreak() {
       aria-labelledby="before-you-go-heading"
       className="relative"
     >
-      <Container className="relative z-10">
+      <Container size="wide" className="relative z-10">
         <EncouragementScratch className="w-full" />
       </Container>
     </Section>

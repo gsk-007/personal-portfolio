@@ -25,12 +25,12 @@ export function Experience() {
     >
       <ExperienceBackground activeIndex={activeIndex} itemCount={items.length} />
 
-      <Container className="relative z-10">
+      <Container size="wide" className="relative z-10">
         <Heading id="experience-heading" level={2}>
           {heading}
         </Heading>
 
-        <div className="mt-14 hidden lg:grid lg:grid-cols-4 lg:gap-16">
+        <div className="mt-14 hidden lg:grid lg:grid-cols-4 lg:gap-16 2xl:gap-24">
           <aside className="col-span-1">
             <div className="sticky top-24">
               <ExperienceNav

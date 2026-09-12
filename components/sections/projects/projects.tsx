@@ -20,8 +20,8 @@ export function Projects() {
     >
       <ProjectsBackground />
 
-      <Container className="relative z-10">
-        <div className="max-w-2xl">
+      <Container size="wide" className="relative z-10">
+        <div className="max-w-2xl 2xl:max-w-3xl">
           <Heading id="projects-heading" level={2}>
             {heading}
           </Heading>
@@ -30,7 +30,7 @@ export function Projects() {
           </p>
         </div>
 
-        <div className="mt-14">
+        <div className="mt-14 2xl:mt-20 lg:px-8 xl:px-12 2xl:px-24">
           <FeaturedProject
             id={featured.id}
             name={featured.name}
@@ -40,7 +40,7 @@ export function Projects() {
           />
         </div>
 
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:mt-10">
+        <div className="mt-8 grid gap-8 xl:grid-cols-2 lg:mt-12 lg:px-8 xl:px-12 2xl:gap-14 2xl:px-24">
           {secondary.map((project) => (
             <ProjectPanel key={project.id} project={project} />
           ))}

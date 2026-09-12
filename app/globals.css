@@ -152,12 +152,37 @@
     }
   }
 
-  .hero-grid-mask {
+  .hero-grid-fallback {
+    background-image:
+      linear-gradient(to right, var(--hero-grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--hero-grid-line) 1px, transparent 1px);
+    background-size: var(--hero-grid-size) var(--hero-grid-size);
     mask-image: radial-gradient(
       ellipse 92% 78% at 50% 42%,
       #000 24%,
       transparent 84%
     );
+    animation: hero-grid-drift 75s linear infinite;
+  }
+
+  .hero-grid-fallback-static {
+    animation: none;
+  }
+
+  @keyframes hero-grid-drift {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      transform: translate3d(3rem, 3rem, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-grid-fallback {
+      animation: none;
+    }
   }
 
   .experience-grid {

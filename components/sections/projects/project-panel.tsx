@@ -15,8 +15,6 @@ type ProjectPanelProps = {
   className?: string;
 };
 
-const PANEL_HEIGHT = "h-[440px]";
-
 export function ProjectPanel({ project, className }: ProjectPanelProps) {
   const reduceMotion = useReducedMotion();
   const panelRef = useRef<HTMLElement>(null);
@@ -53,7 +51,7 @@ export function ProjectPanel({ project, className }: ProjectPanelProps) {
     <article
       ref={panelRef}
       aria-labelledby={`project-${project.id}-heading`}
-      className={cn("group/panel", className)}
+      className={cn("group/panel flex flex-col h-full", className)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
@@ -61,7 +59,7 @@ export function ProjectPanel({ project, className }: ProjectPanelProps) {
       <div
         ref={spotlightRef}
         className={cn(
-          PANEL_HEIGHT,
+          "flex-1 flex flex-col min-h-[440px]",
           sectionCardClass,
           "panel-spotlight relative overflow-hidden",
           "transition-[border-color,box-shadow] duration-300",
@@ -72,7 +70,7 @@ export function ProjectPanel({ project, className }: ProjectPanelProps) {
           <div className="panel-spotlight-glow pointer-events-none absolute inset-0" aria-hidden="true" />
         ) : null}
 
-        <div className="relative flex h-full flex-col p-6 sm:p-7">
+        <div className="relative flex flex-1 flex-col p-6 sm:p-7">
           <div className="shrink-0">
             <div className="flex items-start justify-between gap-3">
               <h3
@@ -112,8 +110,8 @@ export function ProjectPanel({ project, className }: ProjectPanelProps) {
             ))}
           </ul>
 
-          <div className="mt-5 shrink-0 h-[100px] overflow-hidden">
-            {architecture ? (
+          {architecture ? (
+            <div className="mt-5 shrink-0 h-[100px] overflow-hidden">
               <motion.div
                 className="h-full rounded-lg border border-border/40 bg-surface-elevated/30 px-3 py-3 light:bg-[#fbfcfe] light:border-border/70"
                 animate={
@@ -131,10 +129,10 @@ export function ProjectPanel({ project, className }: ProjectPanelProps) {
                   size="panel"
                 />
               </motion.div>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
 
-          <div className="mt-5 shrink-0 border-t border-border/50 pt-5">
+          <div className="mt-auto pt-5 shrink-0 border-t border-border/50">
             <TechPills items={project.tech} size="sm" />
           </div>
         </div>

@@ -72,9 +72,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
-        <Script id="theme-boot" strategy="beforeInteractive">
-          {themeBootScript}
-        </Script>
+        <script
+          id="theme-boot"
+          dangerouslySetInnerHTML={{ __html: themeBootScript }}
+        />
         <ThemeProvider>
           <SkipLink />
           <Header />

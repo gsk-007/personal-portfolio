@@ -21,7 +21,7 @@ export function Header() {
           : "border-transparent bg-background",
       )}
     >
-      <Container className="flex h-full items-center justify-between gap-3">
+      <Container size="wide" className="flex h-full items-center justify-between gap-3">
         <Link
           href="/"
           className="rounded-lg text-sm font-semibold tracking-tight text-foreground transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"

@@ -22,7 +22,7 @@ const builtWithLinkClass =
 export function Footer() {
   return (
     <footer className={cn(sectionDividerClass, "bg-surface")}>
-      <Container className="space-y-5 py-8 sm:py-10">
+      <Container size="wide" className="space-y-5 py-8 sm:py-10">
         <div
           className="flex flex-col gap-2 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:gap-6"
         >
