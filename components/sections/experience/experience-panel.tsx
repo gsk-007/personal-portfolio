@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { ExperienceItem } from "@/lib/content/experience";
 import { easeOut } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+import { Panel } from "@/components/ui/panel";
 
 type ExperiencePanelProps = {
   experience: ExperienceItem;
@@ -173,31 +174,27 @@ export function ExperiencePanel({
 
   if (!animated) {
     return (
-      <article
+      <Panel
         aria-labelledby={`experience-role-${experience.id}`}
-        className={cn(
-          "rounded-2xl border border-border/55 bg-surface p-7 sm:p-8",
-          className,
-        )}
+        className={cn("p-7 sm:p-8", className)}
       >
         <PanelContent experience={experience} animated={false} />
-      </article>
+      </Panel>
     );
   }
 
+  const MotionPanel = motion.create(Panel);
+
   return (
-    <motion.article
+    <MotionPanel
       aria-labelledby={`experience-role-${experience.id}`}
       initial={motionProps.initial}
       animate={motionProps.animate}
       exit={motionProps.exit}
       transition={{ duration: 0.45, ease: easeOut }}
-      className={cn(
-        "rounded-2xl border border-border/55 bg-surface p-7 sm:p-8",
-        className,
-      )}
+      className={cn("p-7 sm:p-8", className)}
     >
       <PanelContent experience={experience} animated />
-    </motion.article>
+    </MotionPanel>
   );
 }

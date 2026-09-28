@@ -79,6 +79,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ThemeProvider>
           <SkipLink />
           <Header />
+          <Script
+            id="json-ld-person"
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Person",
+                name: siteConfig.author.name,
+                url: siteConfig.url,
+                jobTitle: "Software Engineer",
+                sameAs: [
+                  siteConfig.links.github,
+                  siteConfig.links.linkedin,
+                ].filter(Boolean),
+              }),
+            }}
+          />
           {children}
           <Footer />
         </ThemeProvider>

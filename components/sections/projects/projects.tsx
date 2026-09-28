@@ -5,8 +5,10 @@ import { Section } from "@/components/layout/section";
 import { Heading } from "@/components/ui/heading";
 import { projectsContent } from "@/lib/content/projects";
 import { FeaturedProject } from "./featured-project";
-import { ProjectPanel } from "./project-panel";
 import { ProjectsBackground } from "./projects-background";
+import dynamic from "next/dynamic";
+
+const ProjectPanel = dynamic(() => import("./project-panel").then(mod => mod.ProjectPanel), { ssr: false });
 
 export function Projects() {
   const { heading, subheading, featured, secondary } = projectsContent;

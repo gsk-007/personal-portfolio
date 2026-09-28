@@ -327,7 +327,7 @@ function ArchNode({
   return (
     <motion.div
       className={cn(
-        "relative min-w-0 flex-1 overflow-hidden rounded-lg border bg-surface-elevated/40 light:bg-white light:border-border/80",
+        "relative min-w-0 flex-1 overflow-hidden rounded-lg border bg-surface-elevated/40",
         isFeatured ? "px-2.5 py-2.5 sm:px-3 sm:py-3" : "px-2 py-1.5",
         filled
           ? "border-foreground/30 light:border-heading/30"
