@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { ContactBackground } from "./contact-background";
 import { ContactCopyLinks } from "./contact-copy-links";
 import { ContactPersonalSignoff } from "./contact-personal-signoff";
+import { MaskRevealContainer, MaskRevealItem, ScrollRevealText } from "@/components/motion";
 
 export function Contact() {
   const {
@@ -33,9 +34,13 @@ export function Contact() {
       <ContactBackground />
 
       <Container size="wide" className="relative z-10">
-        <Heading id="contact-heading" level={2}>
-          {sectionHeading}
-        </Heading>
+        <MaskRevealContainer>
+          <Heading id="contact-heading" level={2}>
+            {sectionHeading.split(" ").map((word, i) => (
+              <MaskRevealItem key={i} className="mr-2 last:mr-0">{word}</MaskRevealItem>
+            ))}
+          </Heading>
+        </MaskRevealContainer>
 
         <div className={cn(sectionCardClass, sectionCardPaddingClass, "mt-8 w-full sm:mt-10")}>
           <Badge showIndicator className="text-foreground/70">
@@ -49,9 +54,12 @@ export function Contact() {
             {title}
           </h3>
 
-          <p className="mt-4 max-w-xl text-body leading-body text-muted sm:mt-5">
-            {message}
-          </p>
+          <div className="mt-4 sm:mt-5 max-w-xl">
+            <ScrollRevealText
+              text={message}
+              className="text-body leading-body text-foreground/90"
+            />
+          </div>
 
           <ContactCopyLinks
             channels={channels}

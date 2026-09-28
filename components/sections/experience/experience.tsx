@@ -9,6 +9,7 @@ import { ExperiencePanel } from "@/components/sections/experience/experience-pan
 import { Heading } from "@/components/ui/heading";
 import { useActiveExperience } from "@/hooks/use-active-experience";
 import { experienceContent } from "@/lib/content/experience";
+import { MaskRevealContainer, MaskRevealItem } from "@/components/motion";
 
 export function Experience() {
   const { items, heading } = experienceContent;
@@ -26,9 +27,13 @@ export function Experience() {
       <ExperienceBackground activeIndex={activeIndex} itemCount={items.length} />
 
       <Container size="wide" className="relative z-10">
-        <Heading id="experience-heading" level={2}>
-          {heading}
-        </Heading>
+        <MaskRevealContainer>
+          <Heading id="experience-heading" level={2}>
+            {heading.split(" ").map((word, i) => (
+              <MaskRevealItem key={i} className="mr-2 last:mr-0">{word}</MaskRevealItem>
+            ))}
+          </Heading>
+        </MaskRevealContainer>
 
         <div className="mt-14 hidden lg:grid lg:grid-cols-4 lg:gap-16 2xl:gap-24">
           <aside className="col-span-1">

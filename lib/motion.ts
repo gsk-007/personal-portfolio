@@ -100,6 +100,35 @@ export const heroCardContainer: Variants = {
   },
 };
 
+export const lensFocusItem: Variants = {
+  hidden: { opacity: 0, y: 15, filter: "blur(12px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.8, ease: easeOut },
+  },
+};
+
+export const lensFocusItemReduced: Variants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: easeOut },
+  },
+};
+
+export const lensFocusContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
 export function getMotionVariants(reduceMotion: boolean | null) {
   return reduceMotion ? fadeVariants : fadeUpVariants;
 }
@@ -114,4 +143,37 @@ export function getHeroEntranceVariants(reduceMotion: boolean | null) {
 
 export function getHeroEntranceItemVariants(reduceMotion: boolean | null) {
   return reduceMotion ? heroEntranceItemReduced : heroEntranceItem;
+}
+
+export const maskRevealItem: Variants = {
+  hidden: { y: "100%" },
+  visible: {
+    y: "0%",
+    transition: { duration: 0.6, ease: easeOut },
+  },
+};
+
+export const maskRevealContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+export function getLensFocusVariants(reduceMotion: boolean | null) {
+  return reduceMotion ? staggerContainerReducedVariants : lensFocusContainer;
+}
+
+export function getLensFocusItemVariants(reduceMotion: boolean | null) {
+  return reduceMotion ? lensFocusItemReduced : lensFocusItem;
+}
+
+export function getMaskRevealItemVariants(reduceMotion: boolean | null) {
+  return reduceMotion ? heroEntranceItemReduced : maskRevealItem;
+}
+
+export function getMaskRevealContainerVariants(reduceMotion: boolean | null) {
+  return reduceMotion ? staggerContainerReducedVariants : maskRevealContainer;
 }

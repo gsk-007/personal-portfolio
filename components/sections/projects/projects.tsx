@@ -6,6 +6,7 @@ import { Heading } from "@/components/ui/heading";
 import { projectsContent } from "@/lib/content/projects";
 import { FeaturedProject } from "./featured-project";
 import { ProjectsBackground } from "./projects-background";
+import { MaskRevealContainer, MaskRevealItem, ScrollRevealText } from "@/components/motion";
 import dynamic from "next/dynamic";
 
 const ProjectPanel = dynamic(() => import("./project-panel").then(mod => mod.ProjectPanel), { ssr: false });
@@ -23,14 +24,19 @@ export function Projects() {
       <ProjectsBackground />
 
       <Container size="wide" className="relative z-10">
-        <div className="max-w-2xl 2xl:max-w-3xl">
+        <MaskRevealContainer className="max-w-2xl 2xl:max-w-3xl">
           <Heading id="projects-heading" level={2}>
-            {heading}
+            {heading.split(" ").map((word, i) => (
+              <MaskRevealItem key={i} className="mr-2 last:mr-0">{word}</MaskRevealItem>
+            ))}
           </Heading>
-          <p className="mt-4 text-body leading-body text-muted">
-            {subheading}
-          </p>
-        </div>
+          <div className="mt-4 block">
+            <ScrollRevealText 
+              text={subheading} 
+              className="text-body leading-body text-foreground/90"
+            />
+          </div>
+        </MaskRevealContainer>
 
         <div className="mt-14 2xl:mt-20 lg:px-8 xl:px-12 2xl:px-24">
           <FeaturedProject

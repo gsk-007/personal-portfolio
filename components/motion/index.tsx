@@ -1,11 +1,17 @@
 "use client";
 
+export * from "./scroll-reveal-text";
+
 import { motion, useReducedMotion, type HTMLMotionProps, type Variants } from "framer-motion";
 import {
   getHeroEntranceItemVariants,
   getHeroEntranceVariants,
   getMotionVariants,
   getStaggerVariants,
+  getLensFocusVariants,
+  getLensFocusItemVariants,
+  getMaskRevealContainerVariants,
+  getMaskRevealItemVariants,
 } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
@@ -128,5 +134,84 @@ export function MotionDiv({ className, children, ...props }: MotionDivProps) {
     <motion.div className={cn(className)} {...props}>
       {children}
     </motion.div>
+  );
+}
+
+export function LensFocusContainer({
+  className,
+  children,
+  ...props
+}: HTMLMotionProps<"div">) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={getLensFocusVariants(reduceMotion)}
+      className={className}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function LensFocusItem({
+  className,
+  children,
+  ...props
+}: HTMLMotionProps<"span">) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.span
+      variants={getLensFocusItemVariants(reduceMotion)}
+      className={cn("inline-block", className)}
+      {...props}
+    >
+      {children}
+    </motion.span>
+  );
+}
+
+export function MaskRevealContainer({
+  className,
+  children,
+  ...props
+}: HTMLMotionProps<"div">) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+      variants={getMaskRevealContainerVariants(reduceMotion)}
+      className={className}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+export function MaskRevealItem({
+  className,
+  children,
+  ...props
+}: HTMLMotionProps<"span">) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <span className="inline-block overflow-hidden align-bottom">
+      <motion.span
+        variants={getMaskRevealItemVariants(reduceMotion)}
+        className={cn("inline-block", className)}
+        {...props}
+      >
+        {children}
+      </motion.span>
+    </span>
   );
 }

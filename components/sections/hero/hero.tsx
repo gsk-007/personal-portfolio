@@ -8,7 +8,8 @@ import { HeroBackground } from "@/components/sections/hero/hero-background";
 import { WhatIBuildCard } from "@/components/sections/hero/what-i-build-card";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { HeroStaggerContainer, HeroStaggerItem } from "@/components/motion";
+import { HeroStaggerContainer, HeroStaggerItem, LensFocusItem } from "@/components/motion";
+import { getLensFocusVariants } from "@/lib/motion";
 import { Button } from "@/components/ui/button";
 import { DisplayHeading } from "@/components/ui/heading";
 import { SocialLink } from "@/components/ui/social-link";
@@ -104,14 +105,29 @@ export function Hero() {
                 </span>
               </HeroStaggerItem>
 
-              <HeroStaggerItem className="mt-5 sm:mt-6">
-                <DisplayHeading id="hero-heading">{siteConfig.author.name}</DisplayHeading>
-              </HeroStaggerItem>
+              <motion.div variants={getLensFocusVariants(reduceMotion)} className="mt-5 sm:mt-6">
+                <DisplayHeading id="hero-heading">
+                  <span className="sr-only">{siteConfig.author.name}</span>
+                  <span aria-hidden="true" className="flex flex-wrap items-center justify-center gap-x-4 lg:justify-start">
+                    {siteConfig.author.name.split(" ").map((word, i) => (
+                      <LensFocusItem key={i}>{word}</LensFocusItem>
+                    ))}
+                  </span>
+                </DisplayHeading>
+              </motion.div>
 
-              <HeroStaggerItem className="mt-4 space-y-3 2xl:space-y-4">
+              <motion.div variants={getLensFocusVariants(reduceMotion)} className="mt-4">
                 <p className="text-h4 font-medium tracking-tight text-foreground/90">
-                  {heroContent.role}
+                  <span className="sr-only">{heroContent.role}</span>
+                  <span aria-hidden="true" className="flex flex-wrap items-center justify-center gap-x-1.5 lg:justify-start">
+                    {heroContent.role.split(" ").map((word, i) => (
+                      <LensFocusItem key={i}>{word}</LensFocusItem>
+                    ))}
+                  </span>
                 </p>
+              </motion.div>
+
+              <HeroStaggerItem className="mt-3 2xl:mt-4">
                 <p className="max-w-lg text-body leading-body text-foreground/85 2xl:max-w-2xl">
                   {heroContent.headline}
                 </p>
