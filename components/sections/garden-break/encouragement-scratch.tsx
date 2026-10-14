@@ -458,9 +458,13 @@ function drawFrame(
 
 type EncouragementScratchProps = {
   className?: string;
+  hideHeader?: boolean;
 };
 
-export function EncouragementScratch({ className }: EncouragementScratchProps) {
+export function EncouragementScratch({
+  className,
+  hideHeader = false,
+}: EncouragementScratchProps) {
   const reduceMotion = useReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -728,16 +732,18 @@ export function EncouragementScratch({ className }: EncouragementScratchProps) {
 
   return (
     <div className={cn("w-full", className)}>
-      <div className="max-w-2xl">
-        <Heading id="before-you-go-heading" level={2}>
-          {encouragementScratchContent.heading}
-        </Heading>
-        <p className="mt-4 text-body leading-body text-muted">
-          {encouragementScratchContent.subtitle}
-        </p>
-      </div>
+      {!hideHeader && (
+        <div className="max-w-2xl">
+          <Heading id="before-you-go-heading" level={2}>
+            {encouragementScratchContent.heading}
+          </Heading>
+          <p className="mt-4 text-body leading-body text-muted">
+            {encouragementScratchContent.subtitle}
+          </p>
+        </div>
+      )}
 
-      <div className="mt-8 flex flex-col items-center sm:mt-10">
+      <div className={cn("flex flex-col items-center", !hideHeader ? "mt-8 sm:mt-10" : "mt-0")}>
         <div className="relative w-full max-w-2xl">
           <div
             className="pointer-events-none absolute -inset-6 rounded-[24px] opacity-70 motion-reduce:opacity-50"

@@ -22,7 +22,7 @@ export function resolveTheme(stored: string | null): Theme {
     return stored;
   }
 
-  return getSystemTheme();
+  return "dark";
 }
 
 export function applyTheme(theme: Theme) {
